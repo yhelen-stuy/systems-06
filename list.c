@@ -5,7 +5,7 @@
 
 void print_list(struct node *head) {
     printf("[ ");
-    while(head->next != NULL) {
+    while(head->next) {
         printf("%d,", head->x);
         head = head->next;
     }
@@ -21,21 +21,23 @@ struct node * insert_front(struct node *head, int a) {
 
 struct node * free_list(struct node *head) {
     struct node *start = head;
-    while(start != NULL) {
+    while(start) {
         start = start->next;
         free(start);
     }
+    free(head);
     return head;
 }
 
 int main() {
     struct node *head = (struct node*)malloc(sizeof(struct node));
     head->x = 10;
-    int i;
+    int i = 0;
     for(; i < 5; i++) {
         head = insert_front(head, i);
     }
     struct node *nex = head->next;
     print_list(head);
     free_list(head);
+    print_list(head);
 }

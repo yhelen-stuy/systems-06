@@ -1,7 +1,7 @@
 all:
 	gcc -o list list.c
 
-run:
+run: all
 	./list
 
 clean:
