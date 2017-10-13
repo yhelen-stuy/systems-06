@@ -6,7 +6,7 @@
 void print_list(struct node *head) {
     printf("[ ");
     while(head->next != NULL) {
-        printf("%d\t", head->x);
+        printf("%d,", head->x);
         head = head->next;
     }
     printf("%d ]\n", head->x);
@@ -21,12 +21,11 @@ struct node * insert_front(struct node *head, int a) {
 
 struct node * free_list(struct node *head) {
     struct node *start = head;
-    struct node *prev = start;
-    while(prev != NULL) {
-        prev = prev->next;
-        free(prev);
+    while(start != NULL) {
+        start = start->next;
+        free(start);
     }
-    return start;
+    return head;
 }
 
 int main() {
