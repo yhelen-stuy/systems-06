@@ -9,7 +9,7 @@ void print_list(struct node *head) {
         printf("%d\t", head->x);
         head = head->next;
     }
-    printf("]\n");
+    printf("%d ]\n", head->x);
 }
 
 struct node * insert_front(struct node *head, int a) {
@@ -24,16 +24,19 @@ struct node * free_list(struct node *head) {
     struct node *prev = start;
     while(prev != NULL) {
         prev = prev->next;
-        free(head);
+        free(prev);
     }
     return start;
 }
 
 int main() {
-    struct node head = {10, NULL};
+    struct node *head = (struct node*)malloc(sizeof(struct node));
+    head->x = 10;
     int i;
     for(; i < 5; i++) {
-        insert_front(&head, i);
+        head = insert_front(head, i);
     }
-    print_list(&head);
+    struct node *nex = head->next;
+    print_list(head);
+    free_list(head);
 }
