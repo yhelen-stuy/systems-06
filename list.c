@@ -21,12 +21,14 @@ struct node * insert_front(struct node *head, int a) {
 
 struct node * free_list(struct node *head) {
     struct node *start = head;
-    while(start) {
-        start = start->next;
+    struct node *temp;
+    while(temp) {
+        temp = start->next;
         free(start);
+        start = temp;
     }
     free(head);
-    return head;
+    return NULL;
 }
 
 int main() {
@@ -36,8 +38,6 @@ int main() {
     for(; i < 5; i++) {
         head = insert_front(head, i);
     }
-    struct node *nex = head->next;
     print_list(head);
     free_list(head);
-    print_list(head);
 }
